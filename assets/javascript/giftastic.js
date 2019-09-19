@@ -1,7 +1,8 @@
 function addButtons() {
+    $("#topicBtns").empty();
     topics.forEach(function (topic) {
         let topicId = topic.replace(" ", "+");
-        $("#topicBtns").append(`<button type="button" class="btn btn-info btnMargin" id=${topicId}>${topic}</button>`);
+        $("#topicBtns").append(`<button type="button" class="topicBtn btn btn-info btnMargin" id=${topicId}>${topic}</button>`);
     });
 }
 let topics = ["astartes", "cats", "avengers", "infinity war", "final fantasy"];
@@ -10,11 +11,9 @@ let giphyObject;
 
 addButtons();
 
-
-
 $(document).ready(function () {
-    $(document).on("click", ".btn", function () {
-        
+    $(document).on("click", ".topicBtn", function () {
+
         $("#gifs").empty();
 
         let query = $(this).attr("id");
@@ -25,25 +24,39 @@ $(document).ready(function () {
             function (response) {
                 giphyObject = response;
                 for (let i = 0; i < 10; i++) {
-                    $("#gifs").append(`<img src="${giphyObject.data[i].images.downsized_still.url}" value="gif_still" id="${i}">`);
+                    $("#gifs").append(`<div class="img-div"><p>Rating: ${giphyObject.data[i].rating}</p><img src="${giphyObject.data[i].images.downsized_still.url}" value="gif_still" id="${i}"></div>`);
                 }
             }
         );
     });
-    $(document).on("click", "img", function(){
+    $(document).on("click", "img", function () {
         let i = Number($(this).attr("id"));
-    
+
         if ($(this).attr("value") === "gif_still") {
             //console.log(`${giphyObject.data[i].images.downsized.url}`);
 
             $(this).attr("src", `${giphyObject.data[i].images.downsized.url}`);
             $(this).attr("value", "gif_notStill");
-        }else {
+        } else {
             //console.log(`${giphyObject.data[i].images.downsized_still.url}`);
-                             
+
             $(this).attr("src", `${giphyObject.data[i].images.downsized_still.url}`);
             $(this).attr("value", "gif_still");
         }
+
+    });
+    $("#add-topic").on("click", function (event) {
+
+        event.preventDefault();
+
+        var topic = $("#topic-input").val().trim();
+
+        if (!topic) {
+            return;
+        }
+        
+        topics.push(topic);
+        addButtons();
 
     });
 });
