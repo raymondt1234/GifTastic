@@ -18,7 +18,7 @@ $(document).ready(function () {
 
         let query = $(this).attr("id");
         $.ajax({
-            url: `http://api.giphy.com/v1/gifs/search?q=${query}&api_key=${apiKey}&limit=10`,
+            url: `https://api.giphy.com/v1/gifs/search?q=${query}&api_key=${apiKey}&limit=10`,
             method: "GET"
         }).then(
             function (response) {
