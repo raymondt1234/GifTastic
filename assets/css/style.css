@@ -1,16 +1,19 @@
 .btnMargin{
     margin: 5px;
 }
+
 .img-div{
-    margin: 5px;
-    width: fit-content;
-    float: left;
+    padding: 2px;
 }
-img{
+ 
+img {
     width: 350px;
+    height: 250px;
+    overflow: hidden;
 }
+
 p{
-    margin-left: 30px;
+    text-align: left;
     font-weight: bold;
     font-size: medium;
 }
