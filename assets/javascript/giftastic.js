@@ -2,7 +2,15 @@ function addButtons() {
     $("#topicBtns").empty();
     topics.forEach(function (topic) {
         let topicId = topic.replace(" ", "+");
-        $("#topicBtns").append(`<button type="button" class="topicBtn btn btn-info btnMargin" id=${topicId}>${topic}</button>`);
+        let newBtn = $("<button>");
+
+        newBtn.attr("type", "button");
+        newBtn.attr("class", "topicBtn btn btn-info btnMargin");
+        newBtn.attr("id", topicId);
+        newBtn.html(topic);
+
+        $("#topicBtns").append(newBtn);
+
     });
 }
 let topics = ["astartes", "cats", "avengers", "infinity war", "final fantasy"];
@@ -50,10 +58,10 @@ $(document).ready(function () {
         let i = Number($(this).attr("id"));
 
         if ($(this).attr("value") === "gif_still") {
-            $(this).attr("src", `${giphyObject.data[i].images.downsized.url}`);
+            $(this).attr("src", giphyObject.data[i].images.downsized.url);
             $(this).attr("value", "gif_notStill");
         } else {
-            $(this).attr("src", `${giphyObject.data[i].images.downsized_still.url}`);
+            $(this).attr("src", giphyObject.data[i].images.downsized_still.url);
             $(this).attr("value", "gif_still");
         }
 
